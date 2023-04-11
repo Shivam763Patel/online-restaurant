@@ -27,6 +27,10 @@ tablename: 'adminRestaurant',
 
     },
     
+    isrole:{
+      type: 'boolean',
+      defaultsTo: false
+    }
   },
 
   beforeCreate: function(values, cb) {

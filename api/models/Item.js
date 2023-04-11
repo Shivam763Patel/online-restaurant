@@ -30,7 +30,9 @@ module.exports = {
     },
 
     displayOrder: {
-      type:'number'
+      type:'number',
+      unique: true
+
 
     },
   

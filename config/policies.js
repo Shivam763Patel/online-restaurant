@@ -19,4 +19,20 @@ module.exports.policies = {
 
   // '*': true,
 
+  AuthController: {
+
+    '*': 'isAdmin',
+    'add': true,
+    'login': true
+  },
+  
+  CategoryController: {
+
+
+    'addCategory' : 'isAdmin',
+    'editCategory': 'isAdmin',
+
+  },
+
+
 };

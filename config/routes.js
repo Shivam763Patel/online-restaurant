@@ -21,7 +21,31 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
-    'post /register/admin':'AuthController.add'      
+    'post /admin/register':'AuthController.add',
+    'post /admin/login':'AuthController.login',
+
+    //Add category by admin
+    'post /admin/addCategory': 'CategoryController.addCategory',
+
+    //Edit category by admin
+    'put /admin/editCategory/:id': 'CategoryController.editCategory',
+
+    //Delete Category by admin
+    'post /admin/deleteCategory/:id': 'CategoryController.deleteCategory',
+
+
+    //Add item through Category
+    'post /admin/addItem/:id': 'ItemController.addItem',
+
+      //Edit Item by admin
+      'put /admin/editItem/:id': 'ItemController.editItem',
+
+    //List of item
+    'get /admin/list/:id': 'ItemController.listItem',
+
+
+    //List of Menu item with Search, Filter, and Pagination
+    'post /admin/listMenu': 'ItemController.listMenu'
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
