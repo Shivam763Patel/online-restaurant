@@ -20,7 +20,7 @@ module.exports = async (req,res,proceed) => {
                if(decoded.isrole!== true) {
                  
                 return  res.status(401).send({
-                    message: 'Login faield !'
+                    message: 'Please Login with valid credentials !'
                    
                  })
 
@@ -30,6 +30,7 @@ module.exports = async (req,res,proceed) => {
                {
 
                 proceed()
+
                }
            }
         
@@ -38,7 +39,7 @@ module.exports = async (req,res,proceed) => {
               
                    console.log(err)
                    return res.status(401).send({
-                       message: "Please Login again"
+                       message: "Please Login again !"
                })
                
                

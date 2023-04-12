@@ -49,10 +49,10 @@ module.exports = {
         
             catch(err){
                 console.log(err);
-                res.status(500).send({
+                res.status(422).send({
         
         
-                message: 'Something went wrong,please try again'
+                message: 'Something went wrong,please try again !'
         
         
               })
@@ -111,11 +111,9 @@ module.exports = {
             const id = req.params.id
             try{
               
-    
-                console.log("userid ", id);
              
           
-                const display = await Item.find({ where: {categoryid: id} }).populate('categoryid').sort([
+                const display = await Item.find({ where: {categoryid: id} }).sort([
                     { displayOrder: 'ASC' }
                   ])
                   .then(result => {
@@ -150,13 +148,17 @@ module.exports = {
 
     // list of Menu item with sort,filter, and pagination
     listMenu : async(req,res) => {
-    const itemName = req.body.itemName
+
+        const itemName = req.body.itemName
 
     try{
 
-        const { page = 1, limit = 10 } = req.query
+        const { page, limit } = req.query
+
+ 
 
         let skip
+
 
         if(page<=1)
         {
@@ -167,11 +169,11 @@ module.exports = {
             skip= (page-1)*limit
         }
        
-            const result=await Item.find({ itemName: req.body.search.itemName.trim() })
+            const result=await Item.find({ itemName: req.body.search.itemName.trim() }).populate('categoryid')
             .skip(skip)
             .limit(1)
             .then(result => {
-     
+                
         res.status(200).send
         (
             {
@@ -192,6 +194,24 @@ module.exports = {
       })
     }
 },
+
+
+deleteItem: async (req, res) => {
+    const id = req.params.id
+ 
+    await Item.destroy({ id: id })
+
+        .then(result => {
+            res.status(200).send( {
+
+                success: true,
+                data: result,
+                message: 'Item has been deleted !'
+            })
+        })
+
+},
+
 
 }
 

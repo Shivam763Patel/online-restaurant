@@ -33,12 +33,19 @@ module.exports.routes = {
     //Delete Category by admin
     'post /admin/deleteCategory/:id': 'CategoryController.deleteCategory',
 
+        //List of Category with item  
+        'get /admin/listCategory': 'CategoryController.listCategory',
+
 
     //Add item through Category
     'post /admin/addItem/:id': 'ItemController.addItem',
 
       //Edit Item by admin
       'put /admin/editItem/:id': 'ItemController.editItem',
+
+
+    //Delete Item by admin
+    'post /admin/deleteItem/:id': 'ItemController.deleteItem',
 
     //List of item
     'get /admin/list/:id': 'ItemController.listItem',

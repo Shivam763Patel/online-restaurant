@@ -121,8 +121,32 @@ module.exports = {
     },
 
 
+    listCategory: async (req,res) => {
 
+
+        try{
+            const demo = req.query.name
+        const find = await Category.find({categoryName: demo}).populate('categoryid')
+        .then(result => {
+            res.status(200).send( {
+
+                success: true,
+                data: result,
+                message: 'Category details are.. '
+            })
+        })
+     }
+    catch(err){
+        console.log(err);
+        res.status(500).send({
+
+
+        message: 'Something went wrong,please try again'
+
+
+      })
     }
-
+},
+}
 
 

@@ -31,8 +31,19 @@ module.exports.policies = {
 
     'addCategory' : 'isAdmin',
     'editCategory': 'isAdmin',
+    'deleteCategory': 'isAdmin',
+    'listCategory': 'isAdmin'
+
 
   },
 
+  ItemController: {
+  'addItem': 'isAdmin',
+  'editItem': 'isAdmin',
+  'deleteItem': 'isAdmin',
+  'listItem': 'isAdmin',
+  'listMenu': 'isAdmin'
+
+  },
 
 };
