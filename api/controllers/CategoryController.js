@@ -147,6 +147,26 @@ module.exports = {
       })
     }
 },
+
+
+
+listUser: async (req,res) =>{
+
+    Item.native(function(err, collection) {
+        if (err) return res.serverError(err);
+    
+        collection.aggregate(
+          [
+   
+            // { match : { categoryName : Category.categoryName } },
+            { groupBy: { _id: Item } }
+          ], function(err, result){
+               if (err) return res.serverError(err);
+               console.log(result);
+             }
+        );
+    });
+
+},
+
 }
-
-

@@ -10,13 +10,30 @@ module.exports = {
     addItem: async (req,res) => {
 
         const id = req.params.id
-       
+        let demo
             try{
-        
-           
-                    await Item.create(
-                    {
+                await req.file('image').upload({dirname : process.cwd() + '/assets/images/uploads/'},
+                     
+                function (err, uploadedFiles) {
+                   if (err) return res.send(500, err);
+                    
+                   
+                     var image = uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1);
+                     var uploadLocation = process.cwd() +'/assets/images/uploads/' + image;
+                     var tempLocation = process.cwd() + '/.tmp/public/images/uploads/' + image;
+                     
+                    //  //copt file into temp and fetch
+                    //  fs.createReadStream(uploadLocation).pipe(fs.createWriteStream(tempLocation));
 
+                        demo = uploadedFiles[0].fd
+                        console.log('data',demo)
+
+                    })
+
+            
+                    Item.create(
+                    {
+                        
                         categoryid: id,
 
                         itemName: req.body.itemName,
@@ -25,11 +42,14 @@ module.exports = {
 
                         price: req.body.price,
 
-                        displayOrder: req.body.displayOrder,
+                        image: demo,
+
+                        displayOrder: req.body.displayOrder
+
+
                        
-                    }
-                    )
-                    .fetch()
+                    })
+                    
                     .then(result => {
     
                         res.status(200).send( {
@@ -39,7 +59,6 @@ module.exports = {
                             data: result,
                             message: 'Item has been created !'
                         })
-           
         
         
                     })
@@ -149,11 +168,12 @@ module.exports = {
     // list of Menu item with sort,filter, and pagination
     listMenu : async(req,res) => {
 
-        const itemName = req.body.itemName
+      
 
     try{
+        const itemName = req.body.itemName
 
-        const { page, limit } = req.query
+        const { page, limit, name } = req.query
 
  
 
@@ -168,7 +188,7 @@ module.exports = {
         {
             skip= (page-1)*limit
         }
-       
+
             const result=await Item.find({ itemName: req.body.search.itemName.trim() }).populate('categoryid')
             .skip(skip)
             .limit(1)

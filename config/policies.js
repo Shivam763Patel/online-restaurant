@@ -32,7 +32,8 @@ module.exports.policies = {
     'addCategory' : 'isAdmin',
     'editCategory': 'isAdmin',
     'deleteCategory': 'isAdmin',
-    'listCategory': 'isAdmin'
+    'listCategory': 'isAdmin',
+    'listUser': 'isAdmin'
 
 
   },
