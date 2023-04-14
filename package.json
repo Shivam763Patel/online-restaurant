@@ -9,6 +9,7 @@
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.36.1",
     "grunt": "1.0.4",
     "jsonwebtoken": "^9.0.0",
     "nodemon": "^2.0.22",
@@ -16,6 +17,7 @@
     "sails-hook-grunt": "^5.0.0",
     "sails-hook-orm": "^4.0.0",
     "sails-hook-sockets": "^2.0.0",
+    "sails-hook-uploads": "^0.4.3",
     "sails-mongo": "^2.0.1"
   },
   "devDependencies": {

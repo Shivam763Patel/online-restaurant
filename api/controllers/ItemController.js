@@ -5,32 +5,46 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const { log } = require('console');
+
+const cloudinary = require('cloudinary').v2;
+
+
 module.exports = {
   
     addItem: async (req,res) => {
 
         const id = req.params.id
-        let demo
+    
             try{
-                await req.file('image').upload({dirname : process.cwd() + '/assets/images/uploads/'},
-                     
-                function (err, uploadedFiles) {
-                   if (err) return res.send(500, err);
-                    
-                   
-                     var image = uploadedFiles[0].fd.substring(uploadedFiles[0].fd.lastIndexOf('/')+1);
-                     var uploadLocation = process.cwd() +'/assets/images/uploads/' + image;
-                     var tempLocation = process.cwd() + '/.tmp/public/images/uploads/' + image;
-                     
-                    //  //copt file into temp and fetch
-                    //  fs.createReadStream(uploadLocation).pipe(fs.createWriteStream(tempLocation));
+                
+                // Configuration 
+                cloudinary.config({
+                cloud_name: "doymdnqtc",
+                api_key: "836517598646324",
+                api_secret: "odxoPKWLEarKoMzE5OQg3LmxjrU"
+                });
 
-                        demo = uploadedFiles[0].fd
-                        console.log('data',demo)
+              
+                let addFile = await sails.upload(req.file('image'), { maxBytes: 100000000 }); // uploading file to sails local
+                //Sync to the .temp folder
+                console.log(addFile);
+                const result = await cloudinary.uploader.upload(addFile[0].fd, {public_id: addFile[0].filename})       
+                console.log('data file',result.url)
 
-                    })
+                // const filename = result[0].fd.split("\\").reverse()[0];
 
-            
+                // const result = cloudinary.uploader.upload(uploadResult.fd, {public_id: "olympic_flag"})
+
+                // res.then((result) => {
+                // console.log(result);
+                // console.log(result.secure_url);
+
+                // })
+                // .catch((err) => {
+                // console.log(err);
+                // });
+                
                     Item.create(
                     {
                         
@@ -42,7 +56,7 @@ module.exports = {
 
                         price: req.body.price,
 
-                        image: demo,
+                        image: result.url,
 
                         displayOrder: req.body.displayOrder
 

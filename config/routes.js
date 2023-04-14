@@ -54,8 +54,8 @@ module.exports.routes = {
     //List of Menu item with Search, Filter, and Pagination
     'post /admin/listMenu': 'ItemController.listMenu',
 
-    //User list for menu item with order and group by menu category.
-    'get /admin/list': 'CategoryController.listUser',
+    // //User list for menu item with order and group by menu category.
+    // 'get /admin/list': 'CategoryController.listUser',
 
 
   /***************************************************************************
